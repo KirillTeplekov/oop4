@@ -1,16 +1,17 @@
 #pragma once
 #include <string>
+#include <iostream>
 
 using namespace std;
 
 class Car
 {
 	string trademark;
-	unsigned char cyclinders;
+	unsigned int cyclinders;
 	unsigned int  enginePower;
-
-	string toString(unsigned char amount);
+protected:
 	string toString(unsigned int  value);
+
 public:
 	/*
 	Конструктор по умолчанию, создаёт экземпляр класса Car("default mark", 6, 100)
@@ -23,8 +24,9 @@ public:
 	@param _cyclinders - кол-во цилиндров
 	@param _enginePower - мощность двигателя
 	*/
-	Car(string _tMark, unsigned char _cyclinders, unsigned int  _enginePower);
+	Car(string _tMark, unsigned int _cyclinders, unsigned int  _enginePower);
 
+	virtual ~Car() {}
 	/*
 	Получить марку машины
 	@return - возвращает string (значение trademark)
@@ -59,7 +61,7 @@ public:
 	Установить мощность двигателя
 	@param value - мощность двигателя
 	*/
-	void setEnginePower(unsigned value);
+	void setEnginePower(unsigned int value);
 
 	/*
 	Увеличить мощность 
@@ -72,5 +74,13 @@ public:
 	@param value - мощность двигателя
 	*/
 	void reduceEnginePower(unsigned int value);
+
+	/*
+	Потоковый вывод LongLong
+	@param out - поток вывода
+	@param car - выводимый Car
+	@return - возвращает поток вывода
+	*/
+	friend ostream& operator<<(ostream& out, const Car car);
 };
 

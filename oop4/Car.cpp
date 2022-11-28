@@ -1,12 +1,7 @@
 #include "Car.h"
 #include <sstream>
 
-string Car::toString(unsigned char amount)
-{
-	stringstream out;
-	out << amount;
-	return out.str();
-}
+
 
 string Car::toString(unsigned int value)
 {
@@ -15,19 +10,9 @@ string Car::toString(unsigned int value)
 	return out.str();
 }
 
-Car::Car()
-{
-	trademark = "default mark";
-	cyclinders = 6;
-	enginePower = 100;
-}
+Car::Car() : trademark("default mark"), cyclinders(6), enginePower(100) {};
 
-Car::Car(string _tMark, unsigned char _cyclinders, unsigned int _enginePower)
-{
-	trademark = _tMark;
-	cyclinders = _cyclinders;
-	enginePower = _enginePower;
-}
+Car::Car(string _tMark, unsigned int _cyclinders, unsigned int _enginePower): trademark(_tMark), cyclinders(_cyclinders), enginePower(_enginePower) {};
 
 string Car::getTrademark()
 {
@@ -54,7 +39,7 @@ string Car::getEnginePower()
 	return toString(enginePower);
 }
 
-void Car::setEnginePower(unsigned value)
+void Car::setEnginePower(unsigned int value)
 {
 	enginePower = value;
 }
@@ -70,4 +55,10 @@ void Car::reduceEnginePower(unsigned int value)
 		throw std::invalid_argument("Вы пытаетесь уменьшить на значение большее текущего");
 	else
 		enginePower -= value;
+}
+
+ostream& operator<<(ostream& out, const Car car)
+{
+	out << "Car " << car.trademark << " cycl.:" << car.cyclinders << " e.p.:" << car.enginePower;
+	return out;
 }

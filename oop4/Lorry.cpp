@@ -2,27 +2,21 @@
 #include <sstream>
 #include <exception>
 
-string Lorry::toString(unsigned int value)
-{
-	stringstream out;
-	out << value;
-	return out.str();
-}
-
 Lorry::Lorry()
 {
+	a = new int;
 	setTrademark("default lorry mark");
 	setCyclinders(8);
 	setEnginePower(500);
 	setCapacity(1000);
 }
 
-Lorry::Lorry(string _tMark, unsigned char _cyclinders, unsigned int _enginePower, unsigned int _capacity)
-{
-	setTrademark(_tMark);
-	setCyclinders(_cyclinders);
-	setEnginePower(_enginePower);
-	setCapacity(_capacity);
+Lorry::Lorry(string _tMark, unsigned int _cyclinders, unsigned int _enginePower, unsigned int _capacity) : Car(_tMark, _cyclinders, _enginePower), capacity(_capacity) {
+	a = new int;
+}
+
+Lorry::~Lorry() {
+	delete a;
 }
 
 string Lorry::getCapacity()
@@ -46,4 +40,10 @@ void Lorry::reduceCapacity(unsigned int value)
 		throw std::invalid_argument("Вы пытаетесь уменьшить на значение большее текущего");
 	else
 		capacity -= value;
+}
+
+ostream& operator<<(ostream& out, Lorry lorry)
+{
+	out << "Lorry " << lorry.getTrademark() << " cycl.:" << lorry.getCyclinders() << " e.p.:" << lorry.getEnginePower() << " cap.:" << lorry.getCapacity();
+	return out;
 }

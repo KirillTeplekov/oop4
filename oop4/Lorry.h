@@ -1,10 +1,12 @@
 #pragma once
 #include "Car.h"
+
 class Lorry : public Car
 {
 	unsigned int capacity;
-	string toString(unsigned int  value);
+	int* a;
 public:
+
 	/*
 	Конструктор по умолчанию, создаёт экземпляр класса Lorry("default lorry mark", 8, 500, 1000)
 	*/
@@ -17,8 +19,9 @@ public:
 	@param _enginePower - мощность двигателя
 	@param _capacity - грузоподъемность
 	*/
-	Lorry(string _tMark, unsigned char _cyclinders, unsigned int  _enginePower, unsigned int _capacity);
+	Lorry(string _tMark, unsigned int _cyclinders, unsigned int  _enginePower, unsigned int _capacity);
 
+	~Lorry();
 	/*
 	Получить грузоподъемность
 	@return - возвращает string (значение capacity)
@@ -42,5 +45,13 @@ public:
 	@param value - грузоподъемность
 	*/
 	void reduceCapacity(unsigned int value);
+
+	/*
+	Потоковый вывод LongLong
+	@param out - поток вывода
+	@param lorry - выводимый Lorry
+	@return - возвращает поток вывода
+	*/
+	friend ostream& operator<<(ostream& out, Lorry lorry);
 };
 
